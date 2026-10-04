@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="bar">
+    <h1>Shop</h1>
+    <button id="cart-open" aria-label="Open cart">Cart (<span id="cart-count">0</span>)</button>
+  </header>
+
+  <p id="notice" class="notice" hidden></p>
+
+  <main>
+    <h2>Products</h2>
+    <div id="products" class="grid"><p>Loading products...</p></div>
+  </main>
+
+  <aside id="drawer" class="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <h2>Your cart</h2>
+      <button id="cart-close" aria-label="Close cart">Close</button>
+    </div>
+    <div id="cart-items"></div>
+    <div class="drawer-foot">
+      <p>Total: <strong id="cart-total">R0.00</strong></p>
+      <label>Name <input id="cust-name" autocomplete="name"></label>
+      <label>Email <input id="cust-email" type="email" autocomplete="email"></label>
+      <button id="checkout" class="primary">Pay with card</button>
+      <p id="checkout-error" class="error" hidden></p>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>
