@@ -15,5 +15,16 @@ create table if not exists orders (
   items jsonb not null,
   total_cents integer not null,
   status text not null default 'pending',
+  yoco_checkout_id text,
+  first_name text,
+  last_name text,
+  phone text,
+  address_line text,
+  suburb text,
+  city text,
+  province text,
+  postal_code text,
+  delivery_notes text,
+  consent_at timestamptz,
   created_at timestamptz not null default now()
 );

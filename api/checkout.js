@@ -35,6 +35,8 @@ export default async function handler(req, res) {
       console.error('Yoco error', data);
       return res.status(502).json({ error: 'Payment provider error' });
     }
+    // Remember Yoco's checkout id: the webhook identifies payments by it.
+    await sql`update orders set yoco_checkout_id = ${data.id} where id = ${order.id}`;
     return res.status(200).json({ redirectUrl: data.redirectUrl });
   } catch (err) {
     console.error(err);

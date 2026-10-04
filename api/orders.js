@@ -1,6 +1,7 @@
 import { sql } from '../lib/db.js';
 import { cors, isAdmin } from '../lib/http.js';
 
+
 export default async function handler(req, res) {
   if (cors(req, res)) return;
   try {
