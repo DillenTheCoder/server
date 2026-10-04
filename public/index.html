@@ -27,8 +27,25 @@
     <div id="cart-items"></div>
     <div class="drawer-foot">
       <p>Total: <strong id="cart-total">R0.00</strong></p>
-      <label>Name <input id="cust-name" autocomplete="name"></label>
-      <label>Email <input id="cust-email" type="email" autocomplete="email"></label>
+      <p><strong>Your details</strong></p>
+      <label>First name <input id="c-first_name" autocomplete="given-name"></label>
+      <label>Surname <input id="c-last_name" autocomplete="family-name"></label>
+      <label>Email <input id="c-email" type="email" autocomplete="email"></label>
+      <label>Phone <input id="c-phone" type="tel" autocomplete="tel"></label>
+      <label>Street address <input id="c-address_line" autocomplete="street-address"></label>
+      <label>Suburb <input id="c-suburb"></label>
+      <label>City <input id="c-city" autocomplete="address-level2"></label>
+      <label>Province
+        <select id="c-province">
+          <option value="">Choose...</option>
+          <option>Eastern Cape</option><option>Free State</option><option>Gauteng</option>
+          <option>KwaZulu-Natal</option><option>Limpopo</option><option>Mpumalanga</option>
+          <option>Northern Cape</option><option>North West</option><option>Western Cape</option>
+        </select>
+      </label>
+      <label>Postal code <input id="c-postal_code" inputmode="numeric" autocomplete="postal-code"></label>
+      <label>Delivery notes (optional) <input id="c-delivery_notes"></label>
+      <label class="check"><input type="checkbox" id="c-consent"> I agree that my details are used to process and deliver this order.</label>
       <button id="checkout" class="primary">Pay with card</button>
       <p id="checkout-error" class="error" hidden></p>
     </div>

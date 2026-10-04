@@ -70,9 +70,13 @@ async function checkout() {
   btn.disabled = true;
   btn.textContent = "Redirecting to payment...";
   try {
-    const customer_name = $("cust-name").value.trim();
-    const email = $("cust-email").value.trim();
-    if (!customer_name || !email) throw new Error("Enter your name and email first");
+    const FIELDS = ["first_name", "last_name", "email", "phone", "address_line", "suburb", "city", "province", "postal_code", "delivery_notes"];
+    const details = {};
+    FIELDS.forEach((k) => { details[k] = $("c-" + k).value.trim(); });
+    const missing = ["first_name", "last_name", "email", "phone", "address_line", "city", "province", "postal_code"].filter((k) => !details[k]);
+    if (missing.length) throw new Error("Please fill in all the details above (delivery notes and suburb are optional)");
+    if (!$("c-consent").checked) throw new Error("Please tick the box to agree");
+    details.consent = true;
     // Step 1: create the order. We send only ids and quantities; the server looks up real prices.
     const items = Object.entries(cart).map(([id, qty]) => ({ product_id: Number(id), qty }));
     const post = (path, body) => fetch(API_BASE + path, {
@@ -80,7 +84,7 @@ async function checkout() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
-    const orderRes = await post("/api/orders", { customer_name, email, items });
+    const orderRes = await post("/api/orders", { ...details, items });
     const order = await orderRes.json();
     if (!orderRes.ok) throw new Error(order.error || "Could not create order");
     // Step 2: ask the server for a Yoco payment link for that order (route added in the next step).
