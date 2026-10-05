@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Shop</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -19,35 +19,45 @@
     <div id="products" class="grid"><p>Loading products...</p></div>
   </main>
 
-  <aside id="drawer" class="drawer" aria-hidden="true">
+  <div id="scrim" class="scrim"></div>
+
+  <aside id="drawer" class="drawer empty" data-step="cart" role="dialog" aria-modal="true"
+         aria-labelledby="drawer-title" aria-hidden="true">
     <div class="drawer-head">
-      <h2>Your cart</h2>
-      <button id="cart-close" aria-label="Close cart">Close</button>
+  <h2 id="drawer-title">Your cart</h2>
+  <button id="cart-close" aria-label="Close cart">Close</button>
+</div>
+
+    <div class="drawer-body">
+      <div id="cart-items"></div>
+
+      <form id="details" class="details">
+        <label>First name <input id="c-first_name" autocomplete="given-name" required></label>
+        <label class="half">Surname <input id="c-last_name" autocomplete="family-name" required></label>
+        <label>Email <input id="c-email" type="email" autocomplete="email" required></label>
+        <label>Phone <input id="c-phone" type="tel" autocomplete="tel" required></label>
+        <label>Street address <input id="c-address_line" autocomplete="street-address" required></label>
+        <label class="half">Suburb <input id="c-suburb" autocomplete="address-level3"></label>
+        <label class="half">City <input id="c-city" autocomplete="address-level2" required></label>
+        <label class="half">Province
+          <select id="c-province" autocomplete="address-level1" required>
+            <option value="">Choose...</option>
+            <option>Eastern Cape</option><option>Free State</option><option>Gauteng</option>
+            <option>KwaZulu-Natal</option><option>Limpopo</option><option>Mpumalanga</option>
+            <option>Northern Cape</option><option>North West</option><option>Western Cape</option>
+          </select>
+        </label>
+        <label class="half">Postal code <input id="c-postal_code" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" title="4-digit postal code" autocomplete="postal-code" required></label>
+        <label>Delivery notes (optional) <input id="c-delivery_notes"></label>
+        <label class="check"><input type="checkbox" id="c-consent" required> I agree that my details are used to process and deliver this order.</label>
+      </form>
     </div>
-    <div id="cart-items"></div>
+
     <div class="drawer-foot">
-      <p>Total: <strong id="cart-total">R0.00</strong></p>
-      <p><strong>Your details</strong></p>
-      <label>First name <input id="c-first_name" autocomplete="given-name"></label>
-      <label>Surname <input id="c-last_name" autocomplete="family-name"></label>
-      <label>Email <input id="c-email" type="email" autocomplete="email"></label>
-      <label>Phone <input id="c-phone" type="tel" autocomplete="tel"></label>
-      <label>Street address <input id="c-address_line" autocomplete="street-address"></label>
-      <label>Suburb <input id="c-suburb"></label>
-      <label>City <input id="c-city" autocomplete="address-level2"></label>
-      <label>Province
-        <select id="c-province">
-          <option value="">Choose...</option>
-          <option>Eastern Cape</option><option>Free State</option><option>Gauteng</option>
-          <option>KwaZulu-Natal</option><option>Limpopo</option><option>Mpumalanga</option>
-          <option>Northern Cape</option><option>North West</option><option>Western Cape</option>
-        </select>
-      </label>
-      <label>Postal code <input id="c-postal_code" inputmode="numeric" autocomplete="postal-code"></label>
-      <label>Delivery notes (optional) <input id="c-delivery_notes"></label>
-      <label class="check"><input type="checkbox" id="c-consent"> I agree that my details are used to process and deliver this order.</label>
-      <button id="checkout" class="primary">Pay with card</button>
-      <p id="checkout-error" class="error" hidden></p>
+      <div class="total-row"><span>Total</span><strong id="cart-total">R0.00</strong></div>
+      <p id="checkout-error" class="error" role="alert" hidden></p>
+      <button id="to-details" class="primary" type="button">Checkout</button>
+      <button id="checkout" class="primary" type="submit" form="details">Pay with card</button>
     </div>
   </aside>
 

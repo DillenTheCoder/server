@@ -105,7 +105,9 @@ async function checkout() {
 // One listener handles every button inside the product grid and the cart.
 document.addEventListener("click", (e) => {
   const t = e.target;
-  if (t.dataset.add) { changeQty(t.dataset.add, 1); $("drawer").classList.add("open"); }
+  if (t.dataset.add) {
+  changeQty(t.dataset.add, 1);
+}
   if (t.dataset.inc) changeQty(t.dataset.inc, 1);
   if (t.dataset.dec) changeQty(t.dataset.dec, -1);
 });
