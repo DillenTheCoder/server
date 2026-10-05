@@ -4,6 +4,7 @@ create table if not exists products (
   description text not null default '',
   price_cents integer not null,
   image_url text not null default '',
+  image_data text,
   stock integer not null default 0,
   active boolean not null default true
 );

@@ -5,6 +5,7 @@ let products = [];
 let cart = JSON.parse(localStorage.getItem("cart") || "{}"); // { productId: quantity }
 
 const $ = (id) => document.getElementById(id);
+const imgSrc = (u) => (/^https?:/.test(u) ? u : API_BASE + u);
 const rand = (cents) => "R" + (cents / 100).toFixed(2);
 // Escape text before putting it in HTML, so edited product names can't inject code.
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -31,6 +32,7 @@ async function loadProducts() {
 function renderProducts() {
   $("products").innerHTML = products.map((p) => `
     <article class="card">
+      ${p.image_url ? `<img src="${esc(imgSrc(p.image_url))}" alt="${esc(p.name)}" loading="lazy">` : ""}
       <h3>${esc(p.name)}</h3>
       <p>${esc(p.description || "")}</p>
       <span class="price">${rand(p.price_cents)}</span>
