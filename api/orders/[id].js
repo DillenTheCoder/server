@@ -24,6 +24,11 @@ export default async function handler(req, res) {
       }
       return res.status(200).json(row);
     }
+    if (req.method === 'DELETE') {
+      const gone = await sql`delete from orders where id = ${id} returning id`;
+      if (gone.length === 0) return res.status(404).json({ error: 'Not found' });
+      return res.status(200).json({ deleted: id });
+    }
     res.status(405).json({ error: 'Method not allowed' });
   } catch (err) {
     console.error(err);
